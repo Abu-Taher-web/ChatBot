@@ -65,7 +65,7 @@
     <script>
         function sendMessage() {
             const userMessage = document.getElementById('userInput').value;
-            fetch('/chat', {
+            fetch('/inference_service/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: userMessage })

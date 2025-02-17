@@ -13,13 +13,13 @@ def chatbot_response(message):
     }
     return responses.get(message.lower(), "I'm sorry, I don't understand.")
 
-'''@app.route('/chat', methods=['POST'])
+@app.route('/chat', methods=['POST'])
 def chat():
     data = request.json
     user_message = data.get('message', '')
     bot_reply = chatbot_response(user_message)
     return jsonify({"response": bot_reply})
-'''
+
 
 #Integrating Real AI
 # Load GPT-2 model for text generation
@@ -68,14 +68,12 @@ def chat_llama():
     return jsonify({"response": bot_reply})
 '''
 
-@app.route('/')
-def root():
-    return render_template('index.html')
 
 @app.route('/home')
 def home():
-    return '''<h1>Hello from Home 123</h1>'''
+    return '''<h1>Hello from inference service</h1>'''
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5005)
+    #inference_service
