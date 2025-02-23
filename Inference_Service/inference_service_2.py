@@ -3,8 +3,8 @@ import grpc
 import pickle
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
-import inference__pb2
-import inference__pb2_grpc
+import inference_pb2
+import inference_pb2_grpc
 
 app = Flask(__name__)
 
@@ -58,10 +58,10 @@ def inference():
     ]
     # Replace 'NODE2_IP_ADDRESS' with the actual IP address of Node 2.
     channel = grpc.insecure_channel('NODE2_IP_ADDRESS:50051', options=client_options)
-    stub = inference__pb2_grpc.InferenceServiceStub(channel)
+    stub = inference_pb2_grpc.InferenceServiceStub(channel)
 
     # Build the gRPC request.
-    request_proto = inference__pb2.IntermediateData(
+    request_proto = inference_pb2.IntermediateData(
         input_ids=serialized_input_ids,
         attention_mask=serialized_attention_mask,
         past_key_values=serialized_past_key_values
