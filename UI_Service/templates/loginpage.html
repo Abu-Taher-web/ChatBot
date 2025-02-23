@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            text-align: center;
+            color: white;
+            padding-top: 50px;
+        }
+        .container {
+            background: white;
+            color: black;
+            width: 350px;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+        .btn-login {
+            background: #007bff;
+        }
+        .btn-signup {
+            background: #28a745;
+        }
+        .btn i {
+            margin-right: 8px;
+        }
+        .hidden {
+            display: none;
+        }
+        .switch {
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function showLogin() {
+            document.getElementById("signup-container").classList.add("hidden");
+            document.getElementById("login-container").classList.remove("hidden");
+        }
+
+        function showSignup() {
+            document.getElementById("login-container").classList.add("hidden");
+            document.getElementById("signup-container").classList.remove("hidden");
+        }
+
+        function login() {
+            let username = document.getElementById("login-username").value;
+            let password = document.getElementById("login-password").value;
+
+            fetch("authentication_service/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "username": username, "password": password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === "Login successful!") {
+                    window.location.href = "/chatbot";  // Redirect to chatbot
+                } else {
+                    alert("Invalid username or password!");
+                }
+            });
+        }
+
+        function signup() {
+            let username = document.getElementById("signup-username").value;
+            let password = document.getElementById("signup-password").value;
+
+            fetch("authentication_service/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ "username": username, "password": password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.message === "Signup successful! You can now log in.") {
+                    showLogin(); // Show login form after successful signup
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <div id="login-container" class="container">
+        <h2>Login</h2>
+        <input type="text" id="login-username" placeholder="Enter username">
+        <input type="password" id="login-password" placeholder="Enter password">
+        <button class="btn btn-login" onclick="login()"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <p class="switch" onclick="showSignup()">Don't have an account? Sign up</p>
+    </div>
+
+    <div id="signup-container" class="container hidden">
+        <h2>Signup</h2>
+        <input type="text" id="signup-username" placeholder="Choose a username">
+        <input type="password" id="signup-password" placeholder="Choose a password">
+        <button class="btn btn-signup" onclick="signup()"><i class="fas fa-user-plus"></i> Sign Up</button>
+        <p class="switch" onclick="showLogin()">Already have an account? Login</p>
+    </div>
+
+</body>
+</html>
