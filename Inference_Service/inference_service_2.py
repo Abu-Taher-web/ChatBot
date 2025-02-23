@@ -57,7 +57,11 @@ def inference():
         ('grpc.max_receive_message_length', 50 * 1024 * 1024),
     ]
     # Replace 'NODE2_IP_ADDRESS' with the actual IP address of Node 2.
+<<<<<<< Updated upstream
     channel = grpc.insecure_channel('NODE2_IP_ADDRESS:50051', options=client_options)
+=======
+    channel = grpc.insecure_channel('192.168.0.101:50051', options=client_options)
+>>>>>>> Stashed changes
     stub = inference_pb2_grpc.InferenceServiceStub(channel)
 
     # Build the gRPC request.
