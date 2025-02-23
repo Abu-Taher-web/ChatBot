@@ -48,7 +48,11 @@ client_options = [
     ('grpc.max_send_message_length', 50 * 1024 * 1024),
     ('grpc.max_receive_message_length', 50 * 1024 * 1024),
 ]
+<<<<<<< HEAD
 channel = grpc.insecure_channel('localhost:50051', options=client_options)
+=======
+channel = grpc.insecure_channel('192.168.0.101:50051', options=client_options)
+>>>>>>> cd1e8278c68c0ac7583b157c5cbaa82a8a606841
 stub = inference_pb2_grpc.InferenceServiceStub(channel)
 
 # Build the request message.

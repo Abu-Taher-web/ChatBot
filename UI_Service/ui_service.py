@@ -83,16 +83,16 @@ def chat_gpt2():
 #         return jsonify({"response": "Please enter a valid message."})
 #     bot_reply = generate_llama_response(user_message)
 #     return jsonify({"response": bot_reply})
-
+'''
 @app.route('/chatbot')
 def chatbot():
     if 'user' not in session:
         return redirect(url_for('root'))
     return render_template('chatbot.html')
-
+'''
 @app.route('/')
 def root():
-    return render_template('loginpage.html')
+    return render_template('chatbot.html')
 
 @app.route('/home')
 def home():
@@ -100,3 +100,5 @@ def home():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
+
+# Run the UI service using: python ui_service.py
