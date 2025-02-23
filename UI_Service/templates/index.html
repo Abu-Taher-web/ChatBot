@@ -76,18 +76,36 @@
             });
         }
 
+
         function sendGpt2Message() {
             const userMessage = document.getElementById('userInput').value;
-            fetch('/llama', {
+            
+            // First, send the user message to the prompt engineering service for enhancement
+            fetch('/prompt_engineering_service/generate_prompt', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: userMessage })
             })
             .then(response => response.json())
             .then(data => {
+                // After receiving the enhanced query, send it to the llama inference service
+                return fetch('/llama', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: data.response })
+                });
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the result from the llama service
                 document.getElementById('response').innerText = "llama: " + data.response;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('response').innerText = "Error processing request";
             });
         }
+
     </script>
 </body>
 </html>
