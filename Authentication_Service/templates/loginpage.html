@@ -74,7 +74,7 @@
             let username = document.getElementById("login-username").value;
             let password = document.getElementById("login-password").value;
 
-            fetch("authentication_service/login", {
+            fetch("/authentication_service/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ "username": username, "password": password })
@@ -82,7 +82,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.message === "Login successful!") {
-                    window.location.href = "/chatbot";  // Redirect to chatbot
+                    window.location.href = "/ui_service";  // Redirect to chatbot
                 } else {
                     alert("Invalid username or password!");
                 }
@@ -93,7 +93,7 @@
             let username = document.getElementById("signup-username").value;
             let password = document.getElementById("signup-password").value;
 
-            fetch("authentication_service/signup", {
+            fetch("/authentication_service/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ "username": username, "password": password })

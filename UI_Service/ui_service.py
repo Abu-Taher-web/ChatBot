@@ -92,7 +92,7 @@ def chatbot():
 
 @app.route('/')
 def root():
-    return render_template('loginpage.html')
+    return render_template('chatbot.html')
 
 @app.route('/home')
 def home():

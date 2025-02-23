@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, session
 import os
 
 app = Flask(__name__)
@@ -24,7 +24,7 @@ def save_user(username, password):
 
 @app.route('/')
 def root():
-    return '''<h1>Hello from Home authentication</h1>'''
+    return render_template('loginpage.html')
 
 @app.route('/signup', methods=['POST'])
 def signup():
@@ -58,3 +58,5 @@ def login():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5001, debug=True)  # Runs on a different port
+
+# python authentication_service.py
