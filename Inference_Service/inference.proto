@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+service InferenceService {
+  // Node 1 sends the intermediate data and expects a continuation.
+  rpc ContinueGeneration (IntermediateData) returns (GenerationResult);
+}
+
+message IntermediateData {
+  // Serialized tensors as bytes.
+  bytes input_ids = 1;
+  bytes attention_mask = 2;
+  bytes past_key_values = 3;
+}
+
+message GenerationResult {
+  // The generated text.
+  string continuation = 1;
+}
+
+
