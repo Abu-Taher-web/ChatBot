@@ -132,10 +132,20 @@
             messageInput.value = "";
 
             // Send message to backend
-            fetch("/inference_service/chat", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            // First, send the user message to the prompt engineering service for enhancement
+            fetch('/prompt_engineering_service/generate_prompt', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ "message": userMessage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // After receiving the enhanced query, send it to the inference service
+                return fetch("/inference_service/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ "message": userMessage })
+                });
             })
             .then(response => response.json())
             .then(data => {

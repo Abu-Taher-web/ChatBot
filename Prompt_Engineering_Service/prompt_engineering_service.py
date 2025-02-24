@@ -5,8 +5,8 @@ from openai import OpenAI
 # Initialize FastAPI
 app = FastAPI()
 
-# Set your OpenAI API-K
-openai_api = ""
+# Set your OpenAI API-KEY
+openai_api = "PASTE_THE_KEY_HERE"
 client = OpenAI(api_key=openai_api)
 
 # Request Model
