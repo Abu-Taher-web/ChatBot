@@ -39,9 +39,6 @@ def logout():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    if 'user' not in session:
-        return jsonify({"response": "Unauthorized. Please log in."}), 401
-
     data = request.json
     user_message = data.get('message', '')
     bot_reply = chatbot_response(user_message)
@@ -102,3 +99,4 @@ if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000, debug=True)
 
 # Run the UI service using: python ui_service.py
+#cd UI_Service

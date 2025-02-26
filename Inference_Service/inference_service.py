@@ -24,7 +24,7 @@ def chat():
 #Integrating Real AI
 # Load GPT-2 model for text generation
 # 
-'''
+
 chatbot = pipeline("text-generation", model="gpt2")
 
 def generate_gpt2_response(user_input):
@@ -41,7 +41,7 @@ def chat_gpt2():
 
     bot_reply = generate_gpt2_response(user_message)
     return jsonify({"response": bot_reply})
-'''
+
 # Load LLaMA model for text generation
 #login("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")
 
@@ -77,4 +77,5 @@ def home():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5005)
     #inference_service
-    #python inference_service.py
+    # python inference_service.py
+    # cd Inference_Service

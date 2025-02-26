@@ -10,8 +10,10 @@ MICROSERVICES = {
     "load_balancer": "http://localhost:5002",
     "edge_inference_service": "http://localhost:5003",
     "fine_tuning_service": "http://localhost:5004",
-    "inference_service": "http://localhost:5005",
-    "database_service": "http://localhost:5006"
+    "inference_service1": "http://localhost:5005",
+    "database_service": "http://localhost:5006",
+    "prompt_engineering_service": "http://localhost:5007",
+    "inference_service2": "http://localhost:5008"
     
 }
 
@@ -39,3 +41,4 @@ async def gateway(service: str, path: str, request: Request):
         media_type=response.headers.get("content-type"))
 
 # Run the gateway using: uvicorn api_gateway_service:app --host 0.0.0.0 --port 8000
+# cd API_Gateway_Service

@@ -39,7 +39,7 @@ def first_half_model(input_text, model, tokenizer):
 def inference():
     # Expect a JSON payload like: {"prompt": "Your text here."}
     data = request.get_json()
-    prompt = data.get("prompt", "")
+    prompt = data.get("message", "")
     if not prompt:
         return jsonify({"error": "No prompt provided"}), 400
 
@@ -88,4 +88,6 @@ def inference():
 # ------------------------------
 if __name__ == '__main__':
     # The Flask app listens on port 8080.
-    app.run(host='0.0.0.0', port=5005)
+    app.run(host='0.0.0.0', port=5008)
+    # cd Inference_Service
+    # python inference_service_2.py

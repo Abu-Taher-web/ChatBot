@@ -6,7 +6,7 @@ from openai import OpenAI
 app = FastAPI()
 
 # Set your OpenAI API-KEY
-openai_api = "PASTE_THE_KEY_HERE"
+openai_api = "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"
 client = OpenAI(api_key=openai_api)
 
 # Request Model
@@ -41,3 +41,4 @@ async def generate_prompt(request: QueryRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 # Run the service using: uvicorn prompt_engineering_service:app --host 0.0.0.0 --port 5007
+# cd Prompt_Engineering_Service

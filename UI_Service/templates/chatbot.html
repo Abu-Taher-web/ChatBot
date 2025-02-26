@@ -115,6 +115,7 @@
             }
         }
 
+        /*
         function sendMessage() {
             let messageBox = document.getElementById("chat-box");
             let messageInput = document.getElementById("message");
@@ -141,7 +142,7 @@
             .then(response => response.json())
             .then(data => {
                 // After receiving the enhanced query, send it to the inference service
-                return fetch("/inference_service/chat", {
+                return fetch("/inference_service/gpt2", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ "message": userMessage })
@@ -156,7 +157,96 @@
                 messageBox.appendChild(botMessageDiv);
                 messageBox.scrollTop = messageBox.scrollHeight;
             });
-        }
+    } */
+    /*
+    function sendMessage() {
+        let messageBox = document.getElementById("chat-box");
+        let messageInput = document.getElementById("message");
+        let userMessage = messageInput.value.trim();
+
+        if (userMessage === "") return;
+
+        // Add user message to chat
+        let userMessageDiv = document.createElement("div");
+        userMessageDiv.className = "user-message";
+        userMessageDiv.innerText = userMessage;
+        messageBox.appendChild(userMessageDiv);
+        messageBox.scrollTop = messageBox.scrollHeight;
+
+        messageInput.value = "";
+
+        // Send message to inference service's '/chat' endpoint
+        fetch("/inference_service1/chat", {  // Change URL if different
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json"
+                //"Authorization": "Bearer " + localStorage.getItem("token") // Include token if required
+            },
+            body: JSON.stringify({ "message": userMessage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Add bot response to chat
+            let botMessageDiv = document.createElement("div");
+            botMessageDiv.className = "bot-message";
+            botMessageDiv.innerText = data.response;
+            messageBox.appendChild(botMessageDiv);
+            messageBox.scrollTop = messageBox.scrollHeight;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            let errorMessageDiv = document.createElement("div");
+            errorMessageDiv.className = "bot-message";
+            errorMessageDiv.innerText = "Error: Unable to connect to chatbot.";
+            messageBox.appendChild(errorMessageDiv);
+            messageBox.scrollTop = messageBox.scrollHeight;
+        });
+    }*/
+
+    function sendMessage() {
+        let messageBox = document.getElementById("chat-box");
+        let messageInput = document.getElementById("message");
+        let userMessage = messageInput.value.trim();
+
+        if (userMessage === "") return;
+
+        // Add user message to chat
+        let userMessageDiv = document.createElement("div");
+        userMessageDiv.className = "user-message";
+        userMessageDiv.innerText = userMessage;
+        messageBox.appendChild(userMessageDiv);
+        messageBox.scrollTop = messageBox.scrollHeight;
+
+        messageInput.value = "";
+
+        // Send message to inference service's '/chat' endpoint
+        fetch("/inference_service2/inference", {  // Change URL if different
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json"
+                //"Authorization": "Bearer " + localStorage.getItem("token") // Include token if required
+            },
+            body: JSON.stringify({ "message": userMessage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Add bot response to chat
+            let botMessageDiv = document.createElement("div");
+            botMessageDiv.className = "bot-message";
+            botMessageDiv.innerText = data.response;
+            messageBox.appendChild(botMessageDiv);
+            messageBox.scrollTop = messageBox.scrollHeight;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            let errorMessageDiv = document.createElement("div");
+            errorMessageDiv.className = "bot-message";
+            errorMessageDiv.innerText = "Error: Unable to connect to chatbot.";
+            messageBox.appendChild(errorMessageDiv);
+            messageBox.scrollTop = messageBox.scrollHeight;
+        });
+    }
+        
     </script>
 
 </body>
